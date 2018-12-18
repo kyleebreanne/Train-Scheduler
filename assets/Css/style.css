@@ -1,0 +1,14 @@
+.card-header {
+    text-align: center;
+    font-family: 'Unica One', cursive;
+    font-size: 100px;
+}
+.card-title {
+    text-align: center;
+    font-family: 'Unica One', cursive;
+    font-size: 35px;
+}
+.card-text {
+    font-family: 'Unica One', cursive;
+    font-size: 25px;
+}
