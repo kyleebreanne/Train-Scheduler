@@ -1,50 +1,80 @@
-<!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Train Schedule</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="assets/Css/style.css" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- styling links  -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP"
         crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Unica+One" rel="stylesheet">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" media="screen" href="assets/Css/style.css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.7.0/firebase.js"></script>
+    <script src="../Train-Scheduler/assets/Javascript/schedule.js"></script>
+    <!-- Compressed JavaScript Foundation-->
+    <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.1/dist/js/foundation.min.js" integrity="sha256-WUKHnLrIrx8dew//IpSEmPN/NT3DGAEmIePQYIEJLLs= sha384-53StQWuVbn6figscdDC3xV00aYCPEz3srBdV/QGSXw3f19og3Tq2wTRe0vJqRTEO sha512-X9O+2f1ty1rzBJOC8AXBnuNUdyJg0m8xMKmbt9I3Vu/UOWmSg5zG+dtnje4wAZrKtkopz/PEDClHZ1LXx5IeOw=="
         crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
-    <script src="assets/Javascript/schedule.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.1/moment.min.js"></script>
+   
+    <title>Train Scheduler</title>
 </head>
-
 <body>
-    <div class="card text-white bg-dark mb-3">
-        <div class="card-header">On The Rail's Sheduler</div>
-        <div class="card-body">
-            <h5 class="card-title">Time to Get on "Track"!</h5>
-            <p class="card-text">Current Train Schedule</p>
-        </div>
+ <div class="card text-white bg-dark mb-3">
+            <div class="card-header">On The Rail's Scheduler</div>
+            <div class="card-body">
+                <h5 class="card-title">Time to Get on "Track"!</h5>
+                <p class="card-text">Current Train Schedule</p>
+            </div>
     </div>
-    <table class="table">
-            <thead class="thead-dark">
-              <tr>
-                <th scope="col" class="trainNAme">Tain Name</th>
-                <th scope="col" class="destinationName">Destination</th>
-                <th scope="col" class="frequencyMinutes">Frequency (min)</th>
-                <th scope="col" class="arrivalTime">Next Arrival</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row"></th>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-            </tbody>
-          </table>
-          
+    <div id="main_container">
+        <div>
+            <div>
+                    <table class="table table-dark">
+                    <thead>
+                        <tr>
+                            <th scope="row">Train Name</th>
+                            <th>Destination</th>
+                            <th>Frequency (min)</th>
+                            <th>Next Arrival</th>
+                            <th>Minutes Away</th>
+                        </tr>
+                    </thead>
+                    <tbody id="dataTable"></tbody>
+                </table>
+                <div id= "trainStyle">
+                <div class="grid-x cell align-center" id="addTrainLabel">
+                    <h4>Add Train</h4>
+                </div>
+                <div class="medium-3 cell">
+                    <label>Train Name
+                        <input type="text" id="name">
+                    </label>
+                </div>
+    
+                <div class="medium-3 cell">
+                    <label>Destination
+                        <input type="text" id="destination">
+                    </label>
+                </div>
+                <div class="medium-3 cell">
+                    <label>First Train Time
+                        <input type="text" id="time">
+                    </label>
+                </div>
+                <!-- <div class="cell auto"></div> -->
+                <div class="medium-3 cell">
+                    <label>Frequency (minutes)
+                        <input type="text" id="frequency">
+                    </label>
+                </div>
+                <button type="button" class="btn btn-dark">Submit</button>
+                </div>
+            </div>
+        </div>        
+    </div>    
 
 </body>
-
 </html>

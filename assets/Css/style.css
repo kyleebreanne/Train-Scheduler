@@ -1,7 +1,12 @@
+body{
+    background-image: url("../images/clouds-cloudy-dark-716834.jpg");
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
 .card-header {
     text-align: center;
     font-family: 'Unica One', cursive;
-    font-size: 100px;
+    font-size: 80px;
 }
 .card-title {
     text-align: center;
@@ -11,4 +16,15 @@
 .card-text {
     font-family: 'Unica One', cursive;
     font-size: 25px;
+}
+
+#datatable {
+    text-align: center;
+}
+#trainStyle {
+    text-align: center;
+    font-family: 'Unica One', cursive;
+    color: white;
+    font-size: 30px;
+
 }
